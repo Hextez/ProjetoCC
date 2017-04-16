@@ -1,0 +1,16 @@
+{
+  "db": {
+    "name": "db",
+    "connector": "memory"
+  },
+  "mongoDB": {
+    "host": "ec2-34-209-3-242.us-west-2.compute.amazonaws.com",
+    "port": 27017,
+    "url": "mongodb://cc01:cc01@ec2-34-209-3-242.us-west-2.compute.amazonaws.com:27017/CloudCC",
+    "database": "CloudCC",
+    "password": "cc01",
+    "name": "mongoDB",
+    "user": "cc01",
+    "connector": "mongodb"
+  }
+}
