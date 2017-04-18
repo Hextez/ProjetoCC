@@ -64,10 +64,11 @@ $(".login").css({"display": "none"});
 }
 
 function sendLogin(){
+var url = window.location.href;
 console.log("inside Send Logn");
             var formData = '{ "email":"'+$("#nomeLogin").val()+'","password":"'+$("#pwdLogin").val()+'"}';
             console.log(formData);
-$.post( "http://ec2-34-209-18-171.us-west-2.compute.amazonaws.com:3000/api/Users/login",{ email: $("#nomeLogin").val(), password:$("#pwdLogin").val()}, function( data ) {
+$.post( url.substring(0,url.length-6)+"/api/Users/login",{ email: $("#nomeLogin").val(), password:$("#pwdLogin").val()}, function( data ) {
 console.log(data);
 userID = data['userId'];
 access_token = data['id'];
@@ -76,12 +77,13 @@ goToLoginDone();
 });
 }
 function sendRegister(){
+var url = window.location.href;
 console.log("inside Send");
             var formData = '{ "email":"'+$("#nome").val()+'","password":"'+$("#pwd").val()+'" , "username": "'+$("#username").val()+'"}';
             console.log(formData);
 $.ajax({
   type: "POST",
-  url: "http://ec2-34-209-18-171.us-west-2.compute.amazonaws.com:3000/api/Users",
+  url:  url.substring(0,url.length-6)+"/api/Users",
   data: formData,
   success: function(){
   alert("Registo feito");
@@ -93,16 +95,18 @@ $.ajax({
 }
 
 function getInfo(){
-$.get("http://ec2-34-209-18-171.us-west-2.compute.amazonaws.com:3000/api/Users/"+userID+"?access_token="+access_token, function(data, status){
+var url = window.location.href;
+$.get( url.substring(0,url.length-6)+"/api/Users/"+userID+"?access_token="+access_token, function(data, status){
 $("#info").html("<p>Username: "+data["username"]+"</p><br><p>Email: "+data["email"]+"</p><br><p>User ID: "+data["id"]+"</p><br><p>Token: "+access_token+"</p>");
 });
 }
 
 function putValues(){
+var url = window.location.href;
 var formData = '{ "email":"'+$("#altNome").val()+'","password":"'+$("#altPwd").val()+'", "username": "'+$("#altUsername").val()+'"}';
 $.ajax({
   type: "PUT",
-  url: "http://ec2-34-209-18-171.us-west-2.compute.amazonaws.com:3000/api/Users/"+userID+"?access_token="+access_token,
+  url:  url.substring(0,url.length-6)+"/api/Users/"+userID+"?access_token="+access_token,
   data: formData,
   success: function(){
   alert("Valores alterados");
@@ -113,7 +117,8 @@ $.ajax({
 }
 
 function logOut(){
-$.get("http://ec2-34-209-18-171.us-west-2.compute.amazonaws.com:3000/api/Users/logout?access_token="+access_token, function(data, status){
+var url = window.location.href;
+$.get( url.substring(0,url.length-6)+"/api/Users/logout?access_token="+access_token, function(data, status){
 });
 alert("logout feito");
 goToLogin();
